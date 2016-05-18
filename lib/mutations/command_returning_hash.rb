@@ -29,6 +29,10 @@ module Mutations
       def outcome_filters
         @outcome_filters ||= (CommandReturningHash == superclass) ? OutcomeHashFilter.new : superclass.outcome_filters.dup
       end
+
+      def outcome_descriptions
+        outcome_filters.outcome_descriptions if outcome_filters.respond_to?(:outcome_descriptions)
+      end
     end
 
     def initialize(*args)

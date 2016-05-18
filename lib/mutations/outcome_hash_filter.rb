@@ -5,6 +5,8 @@ module Mutations
         name = args[0]
         options = args[1] || {}
 
+        @outcome_descriptions[name.to_sym] = current_outcome_description || 'N/A'
+
         @current_outputs[name.to_sym] = type_class.new(options, &block)
       end
     end
@@ -13,8 +15,7 @@ module Mutations
       nils: false
     }
 
-    attr_accessor :optional_outputs
-    attr_accessor :required_outputs
+    attr_accessor :optional_outputs, :required_outputs, :outcome_descriptions, :outcome_description
 
     def initialize(opts = {}, &block)
       super(opts)
@@ -34,6 +35,16 @@ module Mutations
         dupped.required_outputs[k] = v
       end
       dupped
+    end
+
+    def desc(outcome_description)
+      @outcome_description = outcome_description
+    end
+
+    def current_outcome_description
+      (@outcome_description && @outcome_description.dup).tap do
+        @outcome_description = nil
+      end
     end
 
     def outcome_required(&block)
