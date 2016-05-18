@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/am-kantox/mutations-validate-outcome.png)](https://travis-ci.org/am-kantox/mutations-validate-outcome)
 [![Code Climate](https://codeclimate.com/github/am-kantox/mutations-validate-outcome.png)](https://codeclimate.com/github/am-kantox/mutations-validate-outcome)
+[![Test Coverage](https://codeclimate.com/github/am-kantox/mutations-validate-outcome/badges/coverage.svg)](https://codeclimate.com/github/am-kantox/mutations-validate-outcome/coverage)
+[![Issue Count](https://codeclimate.com/github/am-kantox/mutations-validate-outcome/badges/issue_count.svg)](https://codeclimate.com/github/am-kantox/mutations-validate-outcome)
 
 Mixin for [`cypriss/mutations`](https://github.com/cypriss/mutations) allowing validation of outcome
 using the same techniques as an input validation by original gem.
