@@ -22,6 +22,7 @@ module Mutations
 
       @optional_outputs = {}
       @current_outputs = @required_outputs = {}
+      @outcome_descriptions = {}
 
       instance_eval(&block) if block_given?
     end
