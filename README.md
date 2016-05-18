@@ -1,4 +1,4 @@
-# Mutations::Validate::Outcome
+# Mutations :: Mixin for validating outcome
 
 [![Build Status](https://travis-ci.org/am-kantox/mutations-validate-outcome.png)](https://travis-ci.org/am-kantox/mutations-validate-outcome)
 [![Code Climate](https://codeclimate.com/github/am-kantox/mutations-validate-outcome.png)](https://codeclimate.com/github/am-kantox/mutations-validate-outcome)
