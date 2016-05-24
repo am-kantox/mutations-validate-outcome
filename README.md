@@ -21,7 +21,7 @@ In your code:
 
 ```diff
 - require 'mutations'
-+ require 'mutations-validate-outcome'
++ require 'mutations_validate_outcome'
 ```
 
 ## Differences against [`cypriss/mutations`](https://github.com/cypriss/mutations)
