@@ -1,4 +1,4 @@
-class SimpleCommandReturningHash < Mutations::CommandReturningHash
+class SimpleCommandReturningArray < Mutations::CommandReturningArray
   required do
     string :name, max_length: 10
     string :email
@@ -22,7 +22,7 @@ class SimpleCommandReturningHash < Mutations::CommandReturningHash
   end
 
   def execute
-    inputs
+    [inputs.dup, { name: 'John', email: 'aleksei@gmail.com'}.with_indifferent_access]
   end
 
   def validate_outcome(outcome)

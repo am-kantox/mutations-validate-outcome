@@ -29,6 +29,7 @@ require 'mutations/outcome_hash_filter'
 require 'mutations/outcome'
 require 'mutations/command'
 require_relative './mutations/command_returning_hash.rb'
+require_relative './mutations/command_returning_array.rb'
 
 module Mutations
   class << self
