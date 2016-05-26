@@ -1,9 +1,15 @@
 inherit_from: .rubocop_todo.yml
 
+Style/AsciiComments:
+  Enabled: false
+
 Style/MethodDefParentheses:
   Enabled: false
 
 Style/MultilineBlockChain:
+  Enabled: false
+
+Style/ParallelAssignment:
   Enabled: false
 
 Metrics/AbcSize:

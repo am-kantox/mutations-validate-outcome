@@ -49,6 +49,47 @@ module Mutations
       @cache_constants
     end
   end
+
+  class ValidationException
+    def inspect
+      # rubocop:disable Style/FormatString
+      oid = '%x' % (object_id << 1)
+      "#<Mutations::ValidationException:0x#{oid.rjust(14, '0')} @errors=<#{errors}>>"
+      # rubocop:enable Style/FormatString
+    end
+
+    def message
+      errors.map do |k, v|
+        "#{k}: “#{v.message || v.symbol}”"
+      end.join(', ')
+    end
+  end
+
+  class YoValidationException < ValidationException
+    attr_reader :cause, :owner
+    def initialize(e, owner = nil)
+      super(e.is_a?(ValidationException) ? e.errors : Mutations::ErrorHash[error: Mutations::ErrorAtom.new(e.message.to_sym, e.class.name.to_sym, message: e.message)])
+      @cause, @owner = e, owner || caller
+    end
+  end
+
+  class Command
+    class << self
+      def yo! *args
+        result = run!(*args)
+        case name # name of the class
+        when ->(_) { !const_defined?('Hashie::Mash') } then result
+        when /Hash\z/ then ::Hashie::Mash.new(result)
+        when /Array\z/ then result.map { |h| ::Hashie::Mash.new(h) }
+        else result
+        end
+      rescue => e
+        yve = YoValidationException.new(e, self)
+        # we’ll re-raise either if no block was given, or if the block returned truthy
+        raise yve if !block_given? || (yield yve)
+      end
+    end
+  end
 end
 
 Mutations.cache_constants = true
