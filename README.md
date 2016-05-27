@@ -26,10 +26,11 @@ In your code:
 
 ## Differences against [`cypriss/mutations`](https://github.com/cypriss/mutations)
 
-* dropped a support for `1.9` and `j**`
-* `CommandReturningHash` is a command, that is supposed to return… well, you guessed
-* `outcome_required` and `outcome_optional` filters are introduced for the new `CommandReturningHash`
-* `CommandReturningHash#validate_outcome` method is a sibling of `validate` for additional outcome validation
+*  dropped a support for `1.9` and `j**`
+* `CommandReturningHash`, `CommandReturningArray` are commands, that are supposed to return… well, you guessed
+* `outcome_required` and `outcome_optional` filters are introduced for the new `CommandReturningHash` and `CommandReturningArray` classes
+* `CommandReturningHash#validate_outcome` method is a sibling of `validate` for additional outcome validation  on mutations, that are supposed to return a `Hash`
+* `CommandReturningArray#validate_outcome` method is a sibling of `validate` for additional outcome validation on mutations, that are supposed to return an `Array` of similar `Hash`es; the checker for this command is the same as for `CommandReturningHash`, outcome consists of those elements passing validation, `errors` contains an additional field with failed items.
 
 #### Example
 
@@ -70,10 +71,25 @@ class SimpleCommandReturningHash < Mutations::CommandReturningHash
 end
 ```
 
-#### TBD:
+```ruby
+class SimpleCommandReturningArray < Mutations::CommandReturningHash
+  required do
+    string :name, max_length: 10
+    string :email
+  end
 
-* `CommandReturningArrayOfHashes`
+  outcome_required do
+    string :name, max_length: 5
+    string :email
+  end
+
+  def execute
+    [inputs.dup, {name: 'Aleksei', email: 'a@gmail.com'}]
+  end
+end
+```
 
 ## License
 
+The gem is produced by [Kantox LTD](https://kantox.com).
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
