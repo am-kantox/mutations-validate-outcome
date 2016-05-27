@@ -72,7 +72,7 @@ end
 ```
 
 ```ruby
-class SimpleCommandReturningArray < Mutations::CommandReturningHash
+class SimpleCommandReturningArray < Mutations::CommandReturningArray
   required do
     string :name, max_length: 10
     string :email
