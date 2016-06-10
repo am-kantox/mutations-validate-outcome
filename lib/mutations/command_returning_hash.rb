@@ -21,10 +21,12 @@ module Mutations
       def outcome_required(&block)
         create_outcome_attr_methods(:outcome_required, &block)
       end
+      alias_method :required_output, :outcome_required
 
       def outcome_optional(&block)
         create_outcome_attr_methods(:outcome_optional, &block)
       end
+      alias_method :optional_output, :outcome_optional
 
       def outcome_filters
         @outcome_filters ||= (CommandReturningHash == superclass) ? OutcomeHashFilter.new : superclass.outcome_filters.dup

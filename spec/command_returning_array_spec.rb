@@ -87,6 +87,27 @@ describe 'CommandReturningArray' do
       end
     end
 
+    describe "standardized aliases for input and output" do
+      class AliasedCommandReturningArray < Mutations::CommandReturningArray
+
+        required_input { string :name }
+        optional_input { string :email }
+
+        required_output { string :name }
+        optional_output { string :email }
+
+        def execute
+          [{ name: name, email: email }]
+        end
+      end
+
+      it "should define getter methods on params" do
+        mutation = EigenCommandReturningArray.new(name: "John", email: "john@gmail.com")
+        mutation.run
+        assert_equal ["John"], mutation.outcome_name
+      end
+    end
+
     describe "PresentCommandReturningArray" do
       class PresentCommandReturningArray < Mutations::CommandReturningArray
 

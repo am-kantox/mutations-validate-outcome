@@ -88,6 +88,9 @@ module Mutations
         # we’ll re-raise either if no block was given, or if the block returned truthy
         raise yve if !block_given? || (yield yve)
       end
+
+      alias_method :required_input, :required
+      alias_method :optional_input, :optional
     end
   end
 end
