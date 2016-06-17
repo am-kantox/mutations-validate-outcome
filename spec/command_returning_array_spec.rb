@@ -4,6 +4,20 @@ require 'simple_command_returning_array'
 describe 'CommandReturningArray' do
 
   describe "SimpleCommandReturningArray" do
+    it "provide the input descriptions via introspection" do
+      assert_equal(
+        SimpleCommandReturningArray.input_descriptions,
+        name: "The name of length not more than 10 symbols", email: "The email", amount: "The amount"
+      )
+    end
+
+    it "provide the output descriptions via introspection" do
+      assert_equal(
+        SimpleCommandReturningArray.output_descriptions,
+        name: "The name of length not more than 5 symbols", email: "N/A", amount: "The amount"
+      )
+    end
+
     it "should allow valid output" do
       outcome = SimpleCommandReturningArray.run(name: "John", email: "john@gmail.com", amount: 5)
       assert outcome.success?

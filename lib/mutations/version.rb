@@ -1,5 +1,5 @@
 module Mutations
   module ValidateOutcome
-    VERSION = '0.7.222'.freeze
+    VERSION = '0.7.239'.freeze
   end
 end

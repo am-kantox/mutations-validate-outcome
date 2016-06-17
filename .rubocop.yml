@@ -12,6 +12,9 @@ Style/MultilineBlockChain:
 Style/ParallelAssignment:
   Enabled: false
 
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
 Metrics/AbcSize:
   Max: 100
 

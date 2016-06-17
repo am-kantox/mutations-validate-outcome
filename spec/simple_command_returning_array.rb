@@ -1,19 +1,26 @@
 class SimpleCommandReturningArray < Mutations::CommandReturningArray
   required do
+    desc 'The name of length not more than 10 symbols'
     string :name, max_length: 10
+
+    desc 'The email'
     string :email
   end
 
   optional do
+    desc 'The amount'
     integer :amount
   end
 
   outcome_required do
+    desc 'The name of length not more than 5 symbols'
     string :name, max_length: 5
+
     string :email
   end
 
   outcome_optional do
+    desc 'The amount'
     integer :amount
   end
 

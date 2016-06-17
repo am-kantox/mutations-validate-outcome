@@ -35,6 +35,7 @@ module Mutations
       def outcome_descriptions
         outcome_filters.outcome_descriptions if outcome_filters.respond_to?(:outcome_descriptions)
       end
+      alias_method :output_descriptions, :outcome_descriptions
     end
 
     def initialize(*args)
