@@ -33,5 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest-documentation', '~> 0'
   spec.add_development_dependency 'pry', '~> 0.10'
 
-  spec.add_dependency 'mutations', '~> 0.7', "= #{Mutations::ValidateOutcome::VERSION[/\A\d+\.\d+\.\d/]}"
+  spec.add_dependency 'mutations', '~> 0.8'
 end
