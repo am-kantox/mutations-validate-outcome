@@ -5,8 +5,8 @@ require 'minitest/color'
 require 'minitest/documentation'
 require 'pry'
 
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
+require 'simplecov'
+SimpleCov.start
 
 require 'mutations_validate_outcome'
 
