@@ -36,6 +36,26 @@ describe 'CommandReturningHash' do
       assert_equal nil, outcome.result['name']
     end
 
+    it "should not add any errors on nil outcome" do
+      class CommandReturningNilHash < Mutations::CommandReturningHash
+
+        required { string :name }
+        optional { string :email }
+
+        outcome_required { string :name }
+
+        def execute
+          nil
+        end
+      end
+      outcome = CommandReturningNilHash.run
+
+      assert !outcome.success?
+      assert outcome.result.nil?
+      assert_equal 1, outcome.errors.count
+      assert !outcome.errors.key?(:self)
+    end
+
     it "shouldn't throw an exception with run!" do
       result = SimpleCommandReturningHash.run!(name: "John", email: "john@gmail.com", amount: 5)
       assert_equal({ name: "John", email: "john@gmail.com", amount: 5 }.stringify_keys, result)

@@ -50,6 +50,26 @@ describe 'CommandReturningArray' do
       assert_equal 'John', outcome.result.first['name']
     end
 
+    it "should not add any errors on nil outcome" do
+      class CommandReturningNilArray < Mutations::CommandReturningArray
+
+        required { string :name }
+        optional { string :email }
+
+        outcome_required { string :name }
+
+        def execute
+          nil
+        end
+      end
+      outcome = CommandReturningNilArray.run
+
+      assert !outcome.success?
+      assert outcome.result.nil?
+      assert_equal 1, outcome.errors.count
+      assert !outcome.errors.key?(:self)
+    end
+
     it "shouldn't throw an exception with run!" do
       result = SimpleCommandReturningArray.run!(name: "John", email: "john@gmail.com", amount: 5)
       assert_equal([

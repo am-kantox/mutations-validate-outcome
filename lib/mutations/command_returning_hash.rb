@@ -68,11 +68,12 @@ module Mutations
       return validation_outcome if has_errors?
       validation_outcome(
         execute.tap do |result|
-          if result.is_a?(Hash)
+          case result
+          when Hash
             _, @outcome_errors = self.class.outcome_filters.filter(result)
             validate_outcome(result) unless has_outcome_errors?
-          else
-            add_outcome_error :self, :type, "This mutation must return Hash instance (was #{result.class})"
+          when NilClass then nil
+          else add_outcome_error :self, :type, "This mutation must return Hash instance (was #{result.class})"
           end
         end
       )

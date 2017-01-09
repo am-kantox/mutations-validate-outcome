@@ -49,7 +49,8 @@ module Mutations
       return validation_outcome if has_errors?
       validation_outcome(
         execute.tap do |result|
-          if result.is_a?(Array)
+          case result
+          when Array
             result.each_with_index.with_object({}) do |(e, i), memo|
               _, outcome_error = self.class.outcome_filters.filter(e)
               outcome_error = validate_outcome(e) if outcome_error.nil?
@@ -57,8 +58,8 @@ module Mutations
             end.tap do |errs|
               @outcome_errors = errs unless errs.empty?
             end
-          else
-            add_outcome_error :self, :type, "This mutation must return Array instance (was #{result.class})"
+          when NilClass then nil
+          else add_outcome_error :self, :type, "This mutation must return Array instance (was #{result.class})"
           end
         end
       )
