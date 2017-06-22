@@ -178,5 +178,32 @@ describe 'CommandReturningArray' do
       end
     end
 
+    describe "deal with ActiveRecord properly" do
+      let(:master) { Master.create!(whatever: 'I am master') }
+      let(:slaves) do
+        1.upto(10).each do |i|
+          Slave.create!(whatever: "I am slave ##{i} :(", master_id: master.id)
+        end
+      end
+
+      class CommandReturningRelation < Mutations::CommandReturningArray
+        required do
+          model :master, class: Master
+        end
+
+        outcome_required do
+          array :slaves, class: Slave
+        end
+
+        def execute
+          master.slaves
+        end
+      end
+
+      it "should handle ActiveRecord::Relation as an array outcome" do
+        assert CommandReturningRelation.new(master: master).run.success?
+      end
+    end
+
   end
 end

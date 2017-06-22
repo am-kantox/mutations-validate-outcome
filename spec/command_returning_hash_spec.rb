@@ -31,7 +31,7 @@ describe 'CommandReturningHash' do
 
       assert !outcome.success?
       assert_equal :max_length, outcome.errors.symbolic[:name]
-      assert [Hash, ActiveSupport::HashWithIndifferentAccess].any? { |c| outcome.result.is_a? c  }
+      assert([Hash, ActiveSupport::HashWithIndifferentAccess].any? { |c| outcome.result.is_a? c  })
       assert_equal 2, outcome.result.length
       assert_equal nil, outcome.result['name']
     end

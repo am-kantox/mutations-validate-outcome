@@ -32,3 +32,6 @@ Metrics/MethodLength:
 
 Metrics/PerceivedComplexity:
   Max: 42
+
+Metrics/BlockLength:
+  Enabled: false

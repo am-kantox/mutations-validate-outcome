@@ -5,6 +5,8 @@ require 'minitest/color'
 require 'minitest/documentation'
 require 'pry'
 
+require_relative 'spec_sqlite_helper'
+
 require 'simplecov'
 SimpleCov.start
 

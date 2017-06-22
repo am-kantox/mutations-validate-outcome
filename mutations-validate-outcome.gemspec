@@ -1,4 +1,3 @@
-# coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mutations/version'
@@ -32,6 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest-color', '~> 0'
   spec.add_development_dependency 'minitest-documentation', '~> 0'
   spec.add_development_dependency 'pry', '~> 0.10'
+  spec.add_development_dependency 'sqlite3', '~> 1.3'
+  spec.add_development_dependency 'activerecord', '~> 3'
 
   spec.add_dependency 'activesupport', '~> 3'
   spec.add_dependency 'mutations', '~> 0.8'
