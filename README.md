@@ -89,6 +89,10 @@ class SimpleCommandReturningArray < Mutations::CommandReturningArray
 end
 ```
 
+## Changelog
+
+#### `0.9.0` — `ActiveRecord::Relation` support
+
 ## License
 
 The gem is produced by [Kantox LTD](https://kantox.com).

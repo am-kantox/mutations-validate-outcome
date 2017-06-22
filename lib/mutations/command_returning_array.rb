@@ -50,7 +50,7 @@ module Mutations
       validation_outcome(
         execute.tap do |result|
           case result
-          when Array
+          when Array, ActiveRecord::Relation
             result.each_with_index.with_object({}) do |(e, i), memo|
               _, outcome_error = self.class.outcome_filters.filter(e)
               outcome_error = validate_outcome(e) if outcome_error.nil?
